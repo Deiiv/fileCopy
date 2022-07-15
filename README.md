@@ -8,8 +8,8 @@ Simple container to copy files
 version: "2.1"
 services:
   s3sync:
-    image: deiiv/fileCopy
-    container_name: fileCopy
+    image: deiiv/filecopy
+    container_name: filecopy
     # defaults to "0 5 * * *", currently has a bug where doesn't override
     build:
       args:
