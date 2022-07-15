@@ -1,20 +1,14 @@
 FROM alpine:3.16.0
 
-RUN apk --no-cache add \
-    py-pip \
-    python3 &&\
-    pip install --upgrade \
-    pip \
-    awscli
+VOLUME ["/source"]
+VOLUME ["/destination"]
 
-VOLUME ["/data"]
+ADD copy.sh /
+RUN chmod +x /copy.sh
 
-ADD sync.sh /
-RUN chmod +x /sync.sh
-
-ARG CRON_SCHEDULE="0 7 * * *"
+ARG CRON_SCHEDULE="0 5 * * *"
 # create and run a cron file using env variable for the schedule
-RUN echo -e "$CRON_SCHEDULE /sync.sh 2>&1\n" > /etc/sync-cron &&\
-    crontab /etc/sync-cron
+RUN echo -e "$CRON_SCHEDULE /copy.sh 2>&1\n" > /etc/copy-cron &&\
+    crontab /etc/copy-cron
 
 CMD crond -f

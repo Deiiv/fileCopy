@@ -1,5 +1,5 @@
-# AWS S3 sync docker container
-An up to date cron s3 sync container, using the official aws cli image.
+# File copy docker container
+Simple container to copy files
 
 # Sample docker-compose
 
@@ -8,22 +8,17 @@ An up to date cron s3 sync container, using the official aws cli image.
 version: "2.1"
 services:
   s3sync:
-    image: deiiv/s3sync
-    container_name: s3sync
-    # defaults to "0 7 * * *", currently has a bug where doesn't override
+    image: deiiv/fileCopy
+    container_name: fileCopy
+    # defaults to "0 5 * * *", currently has a bug where doesn't override
     build:
       args:
-        - CRON_SCHEDULE="0 7 * * *"
+        - CRON_SCHEDULE="0 5 * * *"
     environment:
       - PUID=
       - PGID=
-      - AWS_ACCESS_KEY_ID=
-      - AWS_SECRET_ACCESS_KEY=
-      - AWS_DEFAULT_REGION=
-      - BUCKET=
-      - BUCKET_PATH=/
-      - PARAMS=                        #currently not working, arrays not support in bin/ash with alpine - OPTIONAL, must be an array, eg: PARAMS=('--exclude' '.somefile' '--exclude' 'somefolder/*')
     volumes:
-      - /your/data/to/sync:/data
+      - /your/source:/source
+      - /your/destination:/destination
     restart: unless-stopped
 ```
