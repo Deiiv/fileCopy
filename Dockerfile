@@ -1,6 +1,6 @@
 FROM alpine:3.16.0
 
-RUN apk --update add rsync
+RUN apk --update add rsync mosquitto mosquitto-clients
 
 VOLUME ["/source"]
 VOLUME ["/destination"]
