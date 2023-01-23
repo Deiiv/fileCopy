@@ -20,10 +20,10 @@ services:
     environment:
       - PUID=
       - PGID=
-      - MQTT_HOST
-      - MQTT_USER
-      - MQTT_PW
-      - MQTT_TOPIC
+      - MQTT_HOST=
+      - MQTT_USER=
+      - MQTT_PW=
+      - MQTT_TOPIC=
     volumes:
       - /your/source:/source
       - /your/destination:/destination
