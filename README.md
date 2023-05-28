@@ -4,6 +4,9 @@ Simple container to copy files
 docker build -t deiiv/filecopy:latest .
 docker push deiiv/filecopy:latest
 
+docker build -t deiiv/filecopy:v1.01 .
+docker push deiiv/filecopy:v1.01
+
 # Sample docker-compose
 
 ```yaml
